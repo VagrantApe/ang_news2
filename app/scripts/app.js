@@ -29,8 +29,8 @@ var app = angular
             controller: 'PostsCtrl'
         })
         .when('posts/:postId', {
-            templateUrl: 'views/showposts.html',
-            controller: 'PostViewsCtrl'
+            templateUrl: 'views/showpost.html',
+            controller: 'PostViewCtrl'
         })
         .when('/register', {
             templateUrl: 'views/register.html',
