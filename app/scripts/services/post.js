@@ -6,7 +6,7 @@ app.factory('Post',
         var posts = $firebase(ref.child('posts')).$asArray();
 
         var Post = {
-            all:posts,
+            all: posts,
             create: function(post){
                 return posts.$add(post).then(function(postRef){
                     $firebase(ref.child('user_posts').child(post.creatorUID))

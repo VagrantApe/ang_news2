@@ -3,6 +3,7 @@
 app.controller('AuthCtrl',
     function ($scope, $location, Auth){
         if(Auth.signedIn()){
+            //console.log('Auth signedin check');
             $location.path('/');
         }
 
@@ -18,6 +19,8 @@ app.controller('AuthCtrl',
             Auth.register($scope.user).then(function(user){
                 return Auth.login($scope.user).then(function(){
                     user.username = $scope.user.username;
+                    //console.log(user);
+                    //console.log(Auth.createProfile(user));
                     return Auth.createProfile(user);
                 }).then(function(){
                     $location.path('/');

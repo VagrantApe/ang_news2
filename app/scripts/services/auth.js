@@ -11,6 +11,7 @@ app.factory('Auth', function($firebaseSimpleLogin, $firebase, FIREBASE_URL, $roo
         createProfile: function(user){
             var profile = {
                 username: user.username,
+                /*jshint camelcase: false*/
                 md5_hash: user.md5_hash
             };
             var profileRef = $firebase(ref.child('profile'));
@@ -27,16 +28,17 @@ app.factory('Auth', function($firebaseSimpleLogin, $firebase, FIREBASE_URL, $roo
             return auth.$getCurrentUser();
         },
         signedIn: function () {
+            console.log('!!Auth.user.provider: ' + !!Auth.user.provider);
             return !!Auth.user.provider;
         },
         user: {}
     };
 
-    $rootScope.$on('firebaseSimpleLogin:login', function(e, user){
+    $rootScope.$on('$firebaseSimpleLogin:login', function(e, user){
         angular.copy(user, Auth.user);
         Auth.user.profile = $firebase(ref.child('profile').child(Auth.user.uid)).$asObject();
 
-        console.log(Auth.user);
+        //console.log(Auth.user);
     });
     $rootScope.$on('$firebaseSimpleLogin:logout', function(){
         console.log('logged out');
